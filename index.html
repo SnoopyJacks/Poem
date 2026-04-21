@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="container">
   <header>
     <h1>Poem Generator</h1>
   </header>
@@ -15,12 +16,13 @@
         <input type="text" placeholder="Enter topic of a poem"
         autofocus
         required
+        class="instructions"
         >
-        <input type="submit"/>
+        <input type="submit" class="submit-button"/>
       </form>
     <div>
         <p>Here is your poem:</p>
-        <p id="poem"></p>
+        <p class="poem"></p>
     </div>
   </main>
   <footer>
@@ -37,7 +39,8 @@
     <a href="https://jz-poem-generator.netlify.app" target="_blank"
       >hosted on Netlify</a
     >
-    <script src="index.js"></script>
   </footer>
+</div>
+<script src="index.js"></script>
 </body>
 </html>
