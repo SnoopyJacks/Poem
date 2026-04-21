@@ -4,9 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Poem Generator</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Welcome to the Poem Generator</h1>
+  <header>
+    <h1>Poem Generator</h1>
+  </header>
+  <main>
+      <form>
+        <input type="text" placeholder="Enter topic of a poem"
+        autofocus
+        required
+        >
+        <input type="submit"/>
+      </form>
+    <div>
+        <p>Here is your poem:</p>
+        <p id="poem"></p>
+    </div>
+  </main>
   <footer>
     This AI project was coded by
     <a href="https://github.com/SnoopyJacks" target="_blank">Justine Ziola</a> and
