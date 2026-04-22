@@ -1,36 +1,28 @@
+function displayPoem(response) {
+  new Typewriter("#poem", {
+    strings: response.data.answer,
+    autoStart: true,
+    delay: 1,
+    cursor: "",
+  });
+}
+
+
 function generatePoem(event) {
   event.preventDefault();
 
-  // Accessing the input by its ID
-  let instructionsInput = document.querySelector("#instructions").value;
+let instructionsInput = document.querySelector("#user-instructions");
+let apiKey = "7da4d2833b785tc382cf9d899bo46033";
+let context = "You are a poet. You write beautiful and creative poems on various topics. Your poems are often emotional, thought-provoking, and full of vivid imagery. You have a deep understanding of language and use it to create powerful and evocative poetry. Your poems can be about love, nature, life, death, or any other topic that inspires you. You have a unique style that sets you apart from other poets, and your work is widely admired for its beauty and depth.";
+let prompt = `User instructions: Write a poem about ${instructionsInput.value}`;
+let apiUrl = `https://api.shecodes.io/ai/v1/generate?prompt=${prompt}&context=${context}&key=${apiKey}`;
 
-  // Debugging: Log the input value
-  console.log("Instructions input value: ", instructionsInput);
+let poemElement = document.querySelector("#poem");
+poemElement.classList.remove("hidden");
+poemElement.innerHTML = `<div class="generating">Generating poem on ${instructionsInput.value}...</div>`;
 
-  let apiKey = "7da4d2833b785tc382cf9d899bo46033"; // Consider secure method for API key
-  let prompt = `Generate a poem on the topic of ${instructionsInput}`;
-  let context =
-    "You are a master poet. You can write poems on any topic. Write in basic HTML format.";
-  let apiUrl = `https://api.shecodes.io/ai/v1/generate?prompt=${prompt}&context=${context}&key=${apiKey}`;
-
-  axios
-    .get(apiUrl)
-    .then((response) => generatePoemResponse(response, instructionsInput))
-    .catch((error) => {
-      console.error("Error fetching the poem:", error);
-      let poemElement = document.querySelector(".poem");
-      poemElement.innerHTML = "Error generating poem. Please try again.";
-    });
+axios.get(apiUrl).then(displayPoem);
 }
 
-function generatePoemResponse(response, instructionsInput) {
-  let poemElement = document.querySelector(".poem");
-  poemElement.classList.remove("hidden");
-
-  // Assuming the poem text is located in response.data.poem
-  let poemText = response.data.poem; // Adjust based on your actual response structure
-  poemElement.innerHTML = `<div>${poemText}</div>`; // Display the generated poem
-}
-
-let poemFormElement = document.querySelector("#poem-form");
+let poemFormElement = document.querySelector("#poem-generator-form");
 poemFormElement.addEventListener("submit", generatePoem);
